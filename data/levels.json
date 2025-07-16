@@ -1,0 +1,235 @@
+[
+  {
+    "id": 1,
+    "name": "Getting Started",
+    "vehicles": [
+      {
+        "id": "red",
+        "name": "AtoB Truck",
+        "orientation": "horizontal",
+        "length": 3,
+        "position": [2, 0]
+      },
+      {
+        "id": "blue1",
+        "name": "Delivery Truck",
+        "orientation": "vertical",
+        "length": 3,
+        "position": [0, 2]
+      },
+      {
+        "id": "green1",
+        "name": "Car",
+        "orientation": "horizontal",
+        "length": 2,
+        "position": [1, 3]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Traffic Jam",
+    "vehicles": [
+      {
+        "id": "red",
+        "name": "AtoB Truck",
+        "orientation": "horizontal",
+        "length": 3,
+        "position": [2, 1]
+      },
+      {
+        "id": "blue1",
+        "name": "Delivery Truck",
+        "orientation": "vertical",
+        "length": 3,
+        "position": [0, 0]
+      },
+      {
+        "id": "blue2",
+        "name": "Delivery Truck",
+        "orientation": "vertical",
+        "length": 3,
+        "position": [1, 3]
+      },
+      {
+        "id": "green1",
+        "name": "Car",
+        "orientation": "horizontal",
+        "length": 2,
+        "position": [0, 4]
+      },
+      {
+        "id": "green2",
+        "name": "Car",
+        "orientation": "vertical",
+        "length": 2,
+        "position": [4, 1]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Squeeze Through",
+    "vehicles": [
+      {
+        "id": "red",
+        "name": "AtoB Truck",
+        "orientation": "horizontal",
+        "length": 2,
+        "position": [2, 0]
+      },
+      {
+        "id": "blue1",
+        "name": "Delivery Truck",
+        "orientation": "horizontal",
+        "length": 3,
+        "position": [1, 2]
+      },
+      {
+        "id": "blue2",
+        "name": "Delivery Truck",
+        "orientation": "vertical",
+        "length": 3,
+        "position": [3, 2]
+      },
+      {
+        "id": "green1",
+        "name": "Car",
+        "orientation": "vertical",
+        "length": 2,
+        "position": [0, 1]
+      },
+      {
+        "id": "green2",
+        "name": "Car",
+        "orientation": "horizontal",
+        "length": 2,
+        "position": [4, 0]
+      },
+      {
+        "id": "green3",
+        "name": "Car",
+        "orientation": "vertical",
+        "length": 2,
+        "position": [0, 4]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Gridlock",
+    "vehicles": [
+      {
+        "id": "red",
+        "name": "AtoB Truck",
+        "orientation": "horizontal",
+        "length": 2,
+        "position": [2, 0]
+      },
+      {
+        "id": "blue1",
+        "name": "Delivery Truck",
+        "orientation": "vertical",
+        "length": 3,
+        "position": [0, 1]
+      },
+      {
+        "id": "blue2",
+        "name": "Delivery Truck",
+        "orientation": "horizontal",
+        "length": 3,
+        "position": [0, 3]
+      },
+      {
+        "id": "blue3",
+        "name": "Delivery Truck",
+        "orientation": "vertical",
+        "length": 3,
+        "position": [3, 3]
+      },
+      {
+        "id": "green1",
+        "name": "Car",
+        "orientation": "horizontal",
+        "length": 2,
+        "position": [3, 0]
+      },
+      {
+        "id": "green2",
+        "name": "Car",
+        "orientation": "vertical",
+        "length": 2,
+        "position": [1, 2]
+      },
+      {
+        "id": "green3",
+        "name": "Car",
+        "orientation": "horizontal",
+        "length": 2,
+        "position": [4, 4]
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Final Challenge",
+    "vehicles": [
+      {
+        "id": "red",
+        "name": "AtoB Truck",
+        "orientation": "horizontal",
+        "length": 2,
+        "position": [2, 1]
+      },
+      {
+        "id": "blue1",
+        "name": "Delivery Truck",
+        "orientation": "vertical",
+        "length": 3,
+        "position": [0, 0]
+      },
+      {
+        "id": "blue2",
+        "name": "Delivery Truck",
+        "orientation": "horizontal",
+        "length": 3,
+        "position": [1, 3]
+      },
+      {
+        "id": "blue3",
+        "name": "Delivery Truck",
+        "orientation": "vertical",
+        "length": 3,
+        "position": [3, 0]
+      },
+      {
+        "id": "green1",
+        "name": "Car",
+        "orientation": "vertical",
+        "length": 2,
+        "position": [0, 2]
+      },
+      {
+        "id": "green2",
+        "name": "Car",
+        "orientation": "horizontal",
+        "length": 2,
+        "position": [3, 4]
+      },
+      {
+        "id": "green3",
+        "name": "Car",
+        "orientation": "vertical",
+        "length": 2,
+        "position": [4, 2]
+      },
+      {
+        "id": "green4",
+        "name": "Car",
+        "orientation": "horizontal",
+        "length": 2,
+        "position": [5, 4]
+      }
+    ]
+  }
+] 
