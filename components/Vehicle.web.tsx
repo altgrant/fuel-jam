@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { StyleSheet, View, Animated, PanResponder } from 'react-native';
+import { StyleSheet, View, Animated, PanResponder, Text } from 'react-native';
 
 import { 
   Vehicle as VehicleType, 
@@ -31,7 +31,50 @@ const lightenColor = (hex: string, percent: number): string => {
 const VehicleShape: React.FC<{ vehicle: VehicleType; width: number; height: number }> = ({ vehicle, width, height }) => {
   const isHorizontal = vehicle.orientation === 'horizontal';
   const vehicleColor = getVehicleColor(vehicle.id);
-  const isTruck = vehicle.length === 3;
+  const isTruck = vehicle.length >= 2;
+  const isPlayerTruck = vehicle.id === 'red';
+  // Determine dynamic cab style adjustments
+  const cabDynamicStyle = React.useMemo(() => {
+    if (!isTruck) return {};
+    if (isHorizontal) {
+      if (isPlayerTruck) {
+        // Cab on right
+        return {
+          marginLeft: CELL_MARGIN,
+          borderTopLeftRadius: 0,
+          borderBottomLeftRadius: 0,
+          borderTopRightRadius: 10,
+          borderBottomRightRadius: 10,
+        };
+      } else {
+        // Cab on left
+        return {
+          marginRight: CELL_MARGIN,
+          borderTopRightRadius: 0,
+          borderBottomRightRadius: 0,
+        };
+      }
+    } else {
+      // Vertical orientations
+      if (isPlayerTruck) {
+        // Cab at bottom (column-reverse)
+        return {
+          marginTop: CELL_MARGIN,
+          borderTopLeftRadius: 0,
+          borderTopRightRadius: 0,
+          borderBottomLeftRadius: 10,
+          borderBottomRightRadius: 10,
+        };
+      } else {
+        // Cab at top
+        return {
+          marginBottom: CELL_MARGIN,
+          borderBottomLeftRadius: 0,
+          borderBottomRightRadius: 0,
+        };
+      }
+    }
+  }, [isTruck, isHorizontal, isPlayerTruck]);
 
   // Dimensions for internal layout
   const vehicleWidth = isHorizontal ? width : CELL_SIZE;
@@ -48,7 +91,13 @@ const VehicleShape: React.FC<{ vehicle: VehicleType; width: number; height: numb
           {
             width: vehicleWidth,
             height: vehicleHeight,
-            flexDirection: isHorizontal ? 'row' : 'column',
+            flexDirection: isHorizontal
+              ? isPlayerTruck
+                ? 'row-reverse'
+                : 'row'
+              : isPlayerTruck
+              ? 'column-reverse'
+              : 'column',
           },
         ]}
       >
@@ -57,6 +106,7 @@ const VehicleShape: React.FC<{ vehicle: VehicleType; width: number; height: numb
           style={[
             isHorizontal ? styles.cabHorizontal : styles.cabVertical,
             { backgroundColor: vehicleColor },
+            cabDynamicStyle,
           ]}
         />
 
@@ -64,9 +114,24 @@ const VehicleShape: React.FC<{ vehicle: VehicleType; width: number; height: numb
         <View
           style={[
             isHorizontal ? styles.trailerHorizontal : styles.trailerVertical,
-            { backgroundColor: trailerColor, flex: 1 },
+            {
+              backgroundColor: trailerColor,
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+            },
           ]}
-        />
+        >
+          {isPlayerTruck && (
+            <Text
+              style={styles.atobLabel}
+              numberOfLines={1}
+              adjustsFontSizeToFit
+            >
+              AtoB
+            </Text>
+          )}
+        </View>
       </View>
     );
   }
@@ -437,8 +502,7 @@ const styles = StyleSheet.create({
   },
   trailerHorizontal: {
     height: '100%',
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
+    borderRadius: 10,
   },
   cabVertical: {
     height: CELL_SIZE,
@@ -448,7 +512,12 @@ const styles = StyleSheet.create({
   },
   trailerVertical: {
     width: '100%',
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
+    borderRadius: 10,
+  },
+  atobLabel: {
+    color: '#000',
+    fontWeight: 'bold',
+    fontSize: CELL_SIZE * 0.5,
+    lineHeight: CELL_SIZE * 0.6,
   },
 }); 

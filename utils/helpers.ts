@@ -35,9 +35,11 @@ export const screenToGrid = (x: number, y: number): [number, number] => {
 
 // Get vehicle color based on ID
 export const getVehicleColor = (vehicleId: string): string => {
-  if (vehicleId === 'red') return '#16a34a'; // Vibrant green for goal truck
-  if (vehicleId.startsWith('blue')) return '#3b82f6'; // Accent blue for cars/trucks
-  if (vehicleId.startsWith('green')) return '#94a3b8'; // Cool gray
+  // Player goal vehicle (formerly red) is now green
+  if (vehicleId === 'red') return '#16a34a'; // Green for AtoB truck
+  if (vehicleId.startsWith('blue')) return '#3b82f6'; // Blue delivery trucks remain unchanged
+  // All two-block cars (ids starting with "green") are now rendered red
+  if (vehicleId.startsWith('green')) return '#dc2626'; // Bright red for cars
   if (vehicleId.startsWith('yellow')) return '#facc15'; // Bright yellow
   if (vehicleId.startsWith('purple')) return '#a855f7'; // Lively purple
   if (vehicleId.startsWith('orange')) return '#f97316'; // Vivid orange

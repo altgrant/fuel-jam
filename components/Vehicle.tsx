@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { PanGestureHandler, GestureHandlerRootView } from 'react-native-gesture-handler';
 import Animated, {
   useAnimatedGestureHandler,
@@ -25,6 +25,8 @@ interface VehicleProps {
   onMove: (vehicleId: string, newPosition: [number, number]) => void;
 }
 
+// (Reverted: dynamic cab style handled only in web variant)
+
 export const Vehicle: React.FC<VehicleProps> = ({ vehicle, allVehicles, onMove }) => {
   const [screenX, screenY] = gridToScreen(vehicle.position[0], vehicle.position[1]);
   
@@ -46,15 +48,15 @@ export const Vehicle: React.FC<VehicleProps> = ({ vehicle, allVehicles, onMove }
     onActive: (event, context) => {
       if (vehicle.orientation === 'horizontal') {
         // Only allow horizontal movement
-        translateX.value = context.startX + event.translationX;
+        translateX.value = (context.startX as number) + event.translationX;
       } else {
         // Only allow vertical movement
-        translateY.value = context.startY + event.translationY;
+        translateY.value = (context.startY as number) + event.translationY;
       }
     },
     onEnd: (event, context) => {
-      const finalX = context.startX + event.translationX;
-      const finalY = context.startY + event.translationY;
+      const finalX = (context.startX as number) + event.translationX;
+      const finalY = (context.startY as number) + event.translationY;
       
       // Convert screen coordinates back to grid
       const [targetRow, targetCol] = screenToGrid(finalX, finalY);
@@ -89,6 +91,8 @@ export const Vehicle: React.FC<VehicleProps> = ({ vehicle, allVehicles, onMove }
     ? vehicle.length * CELL_SIZE + (vehicle.length - 1) * CELL_MARGIN
     : CELL_SIZE;
 
+  // (Reverted: dynamic cab style handled only in web variant)
+
   return (
     <GestureHandlerRootView style={StyleSheet.absoluteFillObject}>
       <PanGestureHandler onGestureEvent={gestureHandler}>
@@ -99,10 +103,18 @@ export const Vehicle: React.FC<VehicleProps> = ({ vehicle, allVehicles, onMove }
               width: vehicleWidth,
               height: vehicleHeight,
               backgroundColor: getVehicleColor(vehicle.id),
+              justifyContent: 'center',
+              alignItems: 'center',
             },
             animatedStyle,
           ]}
-        />
+        >
+          {vehicle.id === 'red' && (
+            <View style={styles.atobLabelContainer} pointerEvents="none">
+              <Text style={styles.atobLabel}>AtoB</Text>
+            </View>
+          )}
+        </Animated.View>
       </PanGestureHandler>
     </GestureHandlerRootView>
   );
@@ -119,5 +131,20 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 2,
+  },
+  atobLabelContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  atobLabel: {
+    color: '#000',
+    fontWeight: 'bold',
+    fontSize: CELL_SIZE * 0.5,
+    lineHeight: CELL_SIZE * 0.6,
   },
 }); 
